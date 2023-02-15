@@ -11,6 +11,7 @@ body {
 }
 h1 {
   font-weight: bold;
+  margin-top: 20px;
 }
 
 .units {
@@ -28,13 +29,6 @@ button.selected {
   text-decoration: underline;
 }
 
-h2 {
-  font-weight: bold;
-  font-size: 25px;
-}
-h3 {
-  font-size: 20px;
-}
 p {
   font-weight: lighter;
 }
