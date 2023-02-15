@@ -1,7 +1,7 @@
 .app-container {
   max-width: 800px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 20px 20px 0 20px;
   border: 1px solid #dee2e6;
   border-radius: 10px;
 }
@@ -9,9 +9,15 @@
 body {
   font-family: "Open Sans", sans-serif;
 }
+
+.search {
+  border-bottom: 2px solid #0d6efd;
+  padding: 10px 0 20px 0;
+}
+
 h1 {
   font-weight: bold;
-  margin-top: 20px;
+  margin-top: 15px;
 }
 
 .units {
@@ -24,31 +30,35 @@ h1 {
   color: #0d6efd;
   text-decoration: underline;
 }
+
 button.selected {
   color: #0d6efd;
   text-decoration: underline;
 }
 
+.unit-text {
+  font-size: 30px;
+  vertical-align: top;
+}
+
+.daily-description {
+  font-weight: bold;
+}
+
 p {
   font-weight: lighter;
 }
-
-p.weather-description::first-letter {
-  text-transform: capitalize;
+p.todays-date {
+  margin-bottom: 24px;
 }
 
-.search {
-  border-bottom: 1px solid black;
-  padding: 10px 0 20px 0;
+.daily {
+  border-top: 1px solid #0d6efd4a;
+  margin: 0 auto;
 }
-.today {
-  padding: 20px 0;
-}
-.humidity-wind {
-  padding-left: 12px;
-}
-.emojis {
-  font-size: 30px;
+
+img#daily-icon {
+  width: 25%;
 }
 
 .source-code {

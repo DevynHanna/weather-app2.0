@@ -73,11 +73,11 @@
       <div class="row">
         <div class="col-4 icon text-center">
           <img
-            src="https://openweathermap.org/img/wn/10d@2x.png"
+            src="https://shecodes-assets.s3.amazonaws.com/api/weather/icons/few-clouds-day.png"
             alt="current-conditions"
             id="icon"
           />
-          <p class="weather-description"></p>
+          <p class="weather-description text-capitalize"></p>
         </div>
         <div class="col-2 temp text-center">
           <h1>
@@ -105,30 +105,68 @@
           </p>
         </div>
       </div>
-      <div class="row text-center">
-        <div class="col-4"><p>Monday</p></div>
-        <div class="col-4"><p>Icon</p></div>
-        <div class="col-4"><p>High/Low</p></div>
-      </div>
-      <div class="row text-center">
-        <div class="col-4"><p>Tuesday</p></div>
-        <div class="col-4"><p>Icon</p></div>
-        <div class="col-4"><p>High/Low</p></div>
-      </div>
-      <div class="row text-center">
-        <div class="col-4"><p>Wednesday</p></div>
-        <div class="col-4"><p>Icon</p></div>
-        <div class="col-4"><p>High/Low</p></div>
-      </div>
-      <div class="row text-center">
-        <div class="col-4"><p>Thursday</p></div>
-        <div class="col-4"><p>Icon</p></div>
-        <div class="col-4"><p>High/Low</p></div>
-      </div>
-      <div class="row text-center">
-        <div class="col-4"><p>Friday</p></div>
-        <div class="col-4"><p>Icon</p></div>
-        <div class="col-4"><p>High/Low</p></div>
+      <div class="weekly-container">
+        <div class="row mt-3 text-center align-items-center daily">
+          <div class="col-4"><p>Monday</p></div>
+          <div class="col-4">
+            <img
+              src="https://shecodes-assets.s3.amazonaws.com/api/weather/icons/few-clouds-day.png"
+              alt="current-conditions"
+              id="daily-icon"
+            />
+            <p class="daily-description"></p>
+          </div>
+          <div class="col-4"><p>High/Low</p></div>
+        </div>
+        <div class="row text-center align-items-center daily">
+          <div class="col-4"><p>Tuesday</p></div>
+          <div class="col-4">
+            <img
+              src="https://shecodes-assets.s3.amazonaws.com/api/weather/icons/few-clouds-day.png"
+              alt="current-conditions"
+              id="daily-icon"
+            />
+            <p class="daily-description"></p>
+          </div>
+          <div class="col-4"><p>High/Low</p></div>
+        </div>
+        <div class="row text-center align-items-center daily">
+          <div class="col-4"><p>Wednesday</p></div>
+          <div class="col-4">
+            <img
+              src="https://shecodes-assets.s3.amazonaws.com/api/weather/icons/few-clouds-day.png"
+              alt="current-conditions"
+              id="daily-icon"
+            />
+            <p class="daily-description"></p>
+          </div>
+          <div class="col-4"><p>High/Low</p></div>
+        </div>
+        <div class="row text-center align-items-center daily">
+          <div class="col-4"><p>Thursday</p></div>
+          <div class="col-4">
+            <img
+              src="https://shecodes-assets.s3.amazonaws.com/api/weather/icons/few-clouds-day.png"
+              alt="current-conditions"
+              id="daily-icon"
+            />
+            <p class="daily-description"></p>
+          </div>
+          <div class="col-4"><p>High/Low</p></div>
+        </div>
+        <div class="row text-center align-items-center daily">
+          <div class="col-4"><p>Friday</p></div>
+          <div class="col-4">
+            <img
+              class="daily-icon"
+              src="https://shecodes-assets.s3.amazonaws.com/api/weather/icons/few-clouds-day.png"
+              alt="current-conditions"
+              id="daily-icon"
+            />
+            <p class="daily-description"></p>
+          </div>
+          <div class="col-4"><p>High/Low</p></div>
+        </div>
       </div>
     </div>
     <script src="src/script.js"></script>
