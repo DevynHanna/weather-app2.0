@@ -1,0 +1,64 @@
+.app-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #dee2e6;
+  border-radius: 10px;
+}
+
+body {
+  font-family: "Open Sans", sans-serif;
+}
+h1 {
+  font-weight: bold;
+}
+
+.units {
+  font-weight: lighter;
+  font-size: 14px;
+  border: none;
+  background: none;
+}
+.units:hover {
+  color: #0d6efd;
+  text-decoration: underline;
+}
+button.selected {
+  color: #0d6efd;
+  text-decoration: underline;
+}
+
+h2 {
+  font-weight: bold;
+  font-size: 25px;
+}
+h3 {
+  font-size: 20px;
+}
+p {
+  font-weight: lighter;
+}
+
+p.weather-description::first-letter {
+  text-transform: capitalize;
+}
+
+.search {
+  border-bottom: 1px solid black;
+  padding: 10px 0 20px 0;
+}
+.today {
+  padding: 20px 0;
+}
+.humidity-wind {
+  padding-left: 12px;
+}
+.emojis {
+  font-size: 30px;
+}
+
+.source-code {
+  text-align: center;
+  margin: 0 auto;
+  font-size: 13px;
+}
