@@ -47,9 +47,15 @@ button.selected {
 
 p {
   font-weight: lighter;
+  margin: 0;
 }
+
 p.todays-date {
   margin-bottom: 24px;
+}
+
+.temp {
+  padding-right: 0;
 }
 
 .daily {
@@ -58,11 +64,11 @@ p.todays-date {
 }
 
 img#daily-icon {
-  width: 25%;
+  width: 35%;
 }
 
 .source-code {
   text-align: center;
-  margin: 0 auto;
+  margin: 5px 0;
   font-size: 13px;
 }

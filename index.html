@@ -85,7 +85,7 @@
             <span class="unit-text">°C</span>
           </h1>
         </div>
-        <div class="col-2 text-left">
+        <div class="col-2 text-left" style="padding-left: 0px">
           <p>
             <button disabled class="units selected c-button">°C</button>
             <span>|</span>
@@ -107,8 +107,8 @@
       </div>
       <div class="weekly-container">
         <div class="row mt-3 text-center align-items-center daily">
-          <div class="col-4"><p>Monday</p></div>
-          <div class="col-4">
+          <div class="col-4 align-items-center"><p>Monday</p></div>
+          <div class="col-4 align-items-center">
             <img
               src="https://shecodes-assets.s3.amazonaws.com/api/weather/icons/few-clouds-day.png"
               alt="current-conditions"
@@ -116,7 +116,7 @@
             />
             <p class="daily-description"></p>
           </div>
-          <div class="col-4"><p>High/Low</p></div>
+          <div class="col-4 align-items-center"><p>High/Low</p></div>
         </div>
         <div class="row text-center align-items-center daily">
           <div class="col-4"><p>Tuesday</p></div>
@@ -169,6 +169,12 @@
         </div>
       </div>
     </div>
+    <p class="source-code">
+      <a href="https://github.com/DevynHanna/weather-app" target="_blank"
+        >Open-source code</a
+      >
+      by Devyn Hanna
+    </p>
     <script src="src/script.js"></script>
   </body>
 </html>
