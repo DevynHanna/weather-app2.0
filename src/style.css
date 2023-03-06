@@ -67,6 +67,10 @@ img#daily-icon {
   width: 35%;
 }
 
+.forcast-min {
+  opacity: 0.5;
+}
+
 .source-code {
   text-align: center;
   margin: 5px 0;

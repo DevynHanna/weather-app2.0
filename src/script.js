@@ -34,6 +34,35 @@ currentDay.innerHTML = ` ${day} ${month} ${date}, ${year} ${hour}:${minutes
   .toString()
   .padStart(2, "0")}`;
 
+function displayForcast() {
+  let forcastElement = document.querySelector("#forcast");
+
+  let forcastHTML = "";
+  let days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
+  days.forEach(function (day) {
+    forcastHTML =
+      forcastHTML +
+      `    
+  <div class="row mt-3 text-center align-items-center daily">
+          <div class="col-4 align-items-center"><p>${day}</p></div>
+          <div class="col-4 align-items-center">
+            <img
+              src="https://shecodes-assets.s3.amazonaws.com/api/weather/icons/few-clouds-day.png"
+              alt="current-conditions"
+              id="daily-icon"
+            />
+            <p class="daily-description"></p>
+          </div>
+          <div class="col-4 align-items-center">
+            <p>High ° <span class="forcast-min"> Low ° </span></p>
+          </div>
+        </div>
+        `;
+  });
+
+  forcastElement.innerHTML = forcastHTML;
+}
+
 function showTemp(response) {
   cTemp = response.data.daily[0].temperature.day;
   let todaysTemp = document.querySelector(".todays-temp");
@@ -145,3 +174,5 @@ let fahrenheitButton = document.querySelector(".f-button");
 fahrenheitButton.addEventListener("click", ChangeToF);
 
 let unitLabel = document.querySelector(".unit-text");
+
+displayForcast();
