@@ -34,6 +34,14 @@ currentDay.innerHTML = ` ${day} ${month} ${date}, ${year} ${hour}:${minutes
   .toString()
   .padStart(2, "0")}`;
 
+let celciusButton = document.querySelector(".c-button");
+celciusButton.addEventListener("click", ChangeToC);
+
+let fahrenheitButton = document.querySelector(".f-button");
+fahrenheitButton.addEventListener("click", ChangeToF);
+
+let unitLabel = document.querySelector(".unit-text");
+
 function displayForcast(response) {
   let forcastElement = document.querySelector("#forcast");
 
@@ -210,11 +218,3 @@ function ChangeToF(event) {
   celciusButton.removeAttribute("disabled");
   fahrenheitButton.setAttribute("disabled", true);
 }
-
-let celciusButton = document.querySelector(".c-button");
-celciusButton.addEventListener("click", ChangeToC);
-
-let fahrenheitButton = document.querySelector(".f-button");
-fahrenheitButton.addEventListener("click", ChangeToF);
-
-let unitLabel = document.querySelector(".unit-text");
