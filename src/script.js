@@ -54,7 +54,8 @@ function displayForcast() {
             <p class="daily-description"></p>
           </div>
           <div class="col-4 align-items-center">
-            <p>High ° <span class="forcast-min"> Low ° </span></p>
+            <p> <span class="forcast-high">High ° </span> 
+            <span class="forcast-min"> Low ° </span></p>
           </div>
         </div>
         `;
@@ -63,26 +64,12 @@ function displayForcast() {
   forcastElement.innerHTML = forcastHTML;
 }
 
-function showTemp(response) {
-  cTemp = response.data.daily[0].temperature.day;
-  let todaysTemp = document.querySelector(".todays-temp");
-  todaysTemp.innerHTML = Math.round(response.data.daily[0].temperature.day);
-  let humidityIndicator = document.querySelector("#humidity");
-  humidityIndicator.innerHTML = response.data.daily[0].temperature.humidity;
-  let windIndicator = document.querySelector("#wind");
-  windIndicator.innerHTML = response.data.daily[0].wind.speed;
+function showForcast(response) {
+  console.log(response);
   let todaysHigh = document.querySelector(".today-high");
   todaysHigh.innerHTML = Math.round(response.data.daily[0].temperature.maximum);
   let todaysLow = document.querySelector(".today-low");
   todaysLow.innerHTML = Math.round(response.data.daily[0].temperature.minimum);
-  let iconElement = document.querySelector("#icon");
-  iconElement.setAttribute(
-    "src",
-    `https://shecodes-assets.s3.amazonaws.com/api/weather/icons/${response.data.daily[0].condition.icon}.png`
-  );
-  iconElement.setAttribute("alt", response.data.daily[0].condition.description);
-  let weatherDescription = document.querySelector(".weather-description");
-  weatherDescription.innerHTML = response.data.daily[0].condition.description;
 }
 
 function changeCity(event) {
@@ -93,32 +80,43 @@ function changeCity(event) {
   let apiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${cityInput.value}&key=${apiKey}&units=metric`;
   h1.innerHTML = cityInput.value;
 
-  axios.get(apiUrl).then(showTemp);
+  axios.get(apiUrl).then(showForcast);
+
+  showCurrentTemp(cityInput.value);
+}
+
+function showCurrentTemp(city) {
+  let apiKey = "f4b9t1e40f9ae2fof04248f3cac60e36";
+  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
+
+  axios.get(apiUrl).then(updateCurrentTemp);
+}
+
+function updateCurrentTemp(response) {
+  console.log({ response });
+  cTemp = response.data.temperature.current;
+  let todaysTemp = document.querySelector(".todays-temp");
+  todaysTemp.innerHTML = Math.round(cTemp);
+  let humidityIndicator = document.querySelector("#humidity");
+  humidityIndicator.innerHTML = response.data.temperature.humidity;
+  let windIndicator = document.querySelector("#wind");
+  windIndicator.innerHTML = response.data.wind.speed;
+  let iconElement = document.querySelector("#icon");
+  iconElement.setAttribute(
+    "src",
+    `https://shecodes-assets.s3.amazonaws.com/api/weather/icons/${response.data.condition.icon}.png`
+  );
+  iconElement.setAttribute("alt", response.data.condition.description);
+  let weatherDescription = document.querySelector(".weather-description");
+  weatherDescription.innerHTML = response.data.condition.description;
 }
 
 function currentLocationTemp(response) {
   console.log(response);
-  cTemp = response.data.daily[0].temperature.day;
-  let todaysTemp = document.querySelector(".todays-temp");
-  todaysTemp.innerHTML = Math.round(response.data.daily[0].temperature.day);
-  let local = document.querySelector(".current-location");
-  local.innerHTML = response.data.city;
-  let humidityIndicator = document.querySelector("#humidity");
-  humidityIndicator.innerHTML = response.data.daily[0].temperature.humidity;
-  let windIndicator = document.querySelector("#wind");
-  windIndicator.innerHTML = response.data.daily[0].wind.speed;
   let todaysHigh = document.querySelector(".today-high");
   todaysHigh.innerHTML = Math.round(response.data.daily[0].temperature.maximum);
   let todaysLow = document.querySelector(".today-low");
   todaysLow.innerHTML = Math.round(response.data.daily[0].temperature.minimum);
-  let iconElement = document.querySelector("#icon");
-  iconElement.setAttribute(
-    "src",
-    `https://shecodes-assets.s3.amazonaws.com/api/weather/icons/${response.data.daily[0].condition.icon}.png`
-  );
-  iconElement.setAttribute("alt", response.data.daily[0].condition.description);
-  let weatherDescription = document.querySelector(".weather-description");
-  weatherDescription.innerHTML = response.data.daily[0].condition.description;
 }
 
 function displayCurrentLocation(position) {
@@ -128,6 +126,35 @@ function displayCurrentLocation(position) {
   let apiUrl = `https://api.shecodes.io/weather/v1/forecast?lon=${lon}&lat=${lat}&key=${apiKey}&units=metric`;
 
   axios.get(apiUrl).then(currentLocationTemp);
+
+  displayCurrentLocationTemp(lat, lon);
+}
+
+function displayCurrentLocationTemp(lat, lon) {
+  let apiKey = "f4b9t1e40f9ae2fof04248f3cac60e36";
+  let apiUrl = `https://api.shecodes.io/weather/v1/current?lon=${lon}&lat=${lat}&key=${apiKey}`;
+  axios.get(apiUrl).then(updateCurrentLocationUi);
+}
+
+function updateCurrentLocationUi(response) {
+  console.log({ response });
+  cTemp = response.data.temperature.current;
+  let todaysTemp = document.querySelector(".todays-temp");
+  todaysTemp.innerHTML = Math.round(cTemp);
+  let local = document.querySelector(".current-location");
+  local.innerHTML = response.data.city;
+  let humidityIndicator = document.querySelector("#humidity");
+  humidityIndicator.innerHTML = response.data.temperature.humidity;
+  let windIndicator = document.querySelector("#wind");
+  windIndicator.innerHTML = response.data.wind.speed;
+  let iconElement = document.querySelector("#icon");
+  iconElement.setAttribute(
+    "src",
+    `https://shecodes-assets.s3.amazonaws.com/api/weather/icons/${response.data.condition.icon}.png`
+  );
+  iconElement.setAttribute("alt", response.data.condition.description);
+  let weatherDescription = document.querySelector(".weather-description");
+  weatherDescription.innerHTML = response.data.condition.description;
 }
 
 function currentLocation() {
