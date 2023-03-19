@@ -35,7 +35,6 @@ currentDay.innerHTML = ` ${day} ${month} ${date}, ${year} ${hour}:${minutes
   .padStart(2, "0")}`;
 
 function displayForcast(response) {
-  console.log({ response });
   let forcastElement = document.querySelector("#forcast");
 
   let forcastHTML = "";
@@ -63,12 +62,14 @@ function displayForcast(response) {
             <p class="daily-description">${day.condition.description}</p>
           </div>
           <div class="col-4 align-items-center">
-            <p> <span class="forcast-high">${Math.round(
+            <p> <span class="forcast-high">
+            <span class="temp-unit">    ${Math.round(
               day.temperature.maximum
-            )}° </span> 
-            <span class="forcast-min">${Math.round(
+            )}</span>° / </span> 
+            <span class="forcast-min">
+            <span class="temp-unit">${Math.round(
               day.temperature.minimum
-            )}° </span></p>
+            )}</span>° </span></p>
           </div>
         </div>
         `;
@@ -78,7 +79,6 @@ function displayForcast(response) {
 }
 
 function showForcast(response) {
-  console.log(response);
   let todaysHigh = document.querySelector(".today-high");
   todaysHigh.innerHTML = Math.round(response.data.daily[0].temperature.maximum);
   let todaysLow = document.querySelector(".today-low");
@@ -107,9 +107,8 @@ function showCurrentTemp(city) {
 }
 
 function updateCurrentTemp(response) {
-  cTemp = response.data.temperature.current;
   let todaysTemp = document.querySelector(".todays-temp");
-  todaysTemp.innerHTML = Math.round(cTemp);
+  todaysTemp.innerHTML = Math.round(response.data.temperature.current);
   let humidityIndicator = document.querySelector("#humidity");
   humidityIndicator.innerHTML = response.data.temperature.humidity;
   let windIndicator = document.querySelector("#wind");
@@ -150,9 +149,8 @@ function displayCurrentLocationTemp(lat, lon) {
 }
 
 function updateCurrentLocationUi(response) {
-  cTemp = response.data.temperature.current;
   let todaysTemp = document.querySelector(".todays-temp");
-  todaysTemp.innerHTML = Math.round(cTemp);
+  todaysTemp.innerHTML = Math.round(response.data.temperature.current);
   let local = document.querySelector(".current-location");
   local.innerHTML = response.data.city;
   let humidityIndicator = document.querySelector("#humidity");
@@ -180,8 +178,12 @@ let city = document.querySelector(".location-search");
 city.addEventListener("submit", changeCity);
 
 function ChangeToC() {
-  let tempElement = document.querySelector("#unit-change");
-  tempElement.innerHTML = Math.round(cTemp);
+  document.querySelectorAll(".temp-unit").forEach((element) => {
+    let currentValue = parseInt(element.innerText.trim());
+    let cTemp = ((currentValue - 32) * 5) / 9;
+
+    element.innerText = Math.round(cTemp);
+  });
   unitLabel.innerText = "°C";
 
   celciusButton.classList.add("selected");
@@ -192,9 +194,14 @@ function ChangeToC() {
 }
 
 function ChangeToF(event) {
-  let tempElement = document.querySelector("#unit-change");
-  let fTemp = (cTemp * 9) / 5 + 32;
-  tempElement.innerHTML = Math.round(fTemp);
+  document.querySelectorAll(".temp-unit").forEach((element) => {
+    let currentValue = parseInt(element.innerText.trim());
+
+    let fTemp = (currentValue * 9) / 5 + 32;
+
+    element.innerText = Math.round(fTemp);
+  });
+
   unitLabel.innerText = "°F";
 
   celciusButton.classList.remove("selected");
@@ -203,8 +210,6 @@ function ChangeToF(event) {
   celciusButton.removeAttribute("disabled");
   fahrenheitButton.setAttribute("disabled", true);
 }
-
-let cTemp = null;
 
 let celciusButton = document.querySelector(".c-button");
 celciusButton.addEventListener("click", ChangeToC);
