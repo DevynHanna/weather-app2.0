@@ -34,28 +34,41 @@ currentDay.innerHTML = ` ${day} ${month} ${date}, ${year} ${hour}:${minutes
   .toString()
   .padStart(2, "0")}`;
 
-function displayForcast() {
+function displayForcast(response) {
+  console.log({ response });
   let forcastElement = document.querySelector("#forcast");
 
   let forcastHTML = "";
-  let days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
-  days.forEach(function (day) {
+
+  response.data.daily.forEach(function (day, index) {
+    if (index === 0) {
+      return;
+    }
     forcastHTML =
       forcastHTML +
       `    
   <div class="row mt-3 text-center align-items-center daily">
-          <div class="col-4 align-items-center"><p>${day}</p></div>
+          <div class="col-4 align-items-center"><p>${
+            days[new Date(day.time * 1000).getDay()]
+          }</p>
+          </div>
           <div class="col-4 align-items-center">
             <img
-              src="https://shecodes-assets.s3.amazonaws.com/api/weather/icons/few-clouds-day.png"
+              src="https://shecodes-assets.s3.amazonaws.com/api/weather/icons/${
+                day.condition.icon
+              }.png"
               alt="current-conditions"
               id="daily-icon"
             />
-            <p class="daily-description"></p>
+            <p class="daily-description">${day.condition.description}</p>
           </div>
           <div class="col-4 align-items-center">
-            <p> <span class="forcast-high">High ° </span> 
-            <span class="forcast-min"> Low ° </span></p>
+            <p> <span class="forcast-high">${Math.round(
+              day.temperature.maximum
+            )}° </span> 
+            <span class="forcast-min">${Math.round(
+              day.temperature.minimum
+            )}° </span></p>
           </div>
         </div>
         `;
@@ -70,6 +83,7 @@ function showForcast(response) {
   todaysHigh.innerHTML = Math.round(response.data.daily[0].temperature.maximum);
   let todaysLow = document.querySelector(".today-low");
   todaysLow.innerHTML = Math.round(response.data.daily[0].temperature.minimum);
+  displayForcast(response);
 }
 
 function changeCity(event) {
@@ -93,7 +107,6 @@ function showCurrentTemp(city) {
 }
 
 function updateCurrentTemp(response) {
-  console.log({ response });
   cTemp = response.data.temperature.current;
   let todaysTemp = document.querySelector(".todays-temp");
   todaysTemp.innerHTML = Math.round(cTemp);
@@ -112,11 +125,11 @@ function updateCurrentTemp(response) {
 }
 
 function currentLocationTemp(response) {
-  console.log(response);
   let todaysHigh = document.querySelector(".today-high");
   todaysHigh.innerHTML = Math.round(response.data.daily[0].temperature.maximum);
   let todaysLow = document.querySelector(".today-low");
   todaysLow.innerHTML = Math.round(response.data.daily[0].temperature.minimum);
+  displayForcast(response);
 }
 
 function displayCurrentLocation(position) {
@@ -137,7 +150,6 @@ function displayCurrentLocationTemp(lat, lon) {
 }
 
 function updateCurrentLocationUi(response) {
-  console.log({ response });
   cTemp = response.data.temperature.current;
   let todaysTemp = document.querySelector(".todays-temp");
   todaysTemp.innerHTML = Math.round(cTemp);
@@ -201,5 +213,3 @@ let fahrenheitButton = document.querySelector(".f-button");
 fahrenheitButton.addEventListener("click", ChangeToF);
 
 let unitLabel = document.querySelector(".unit-text");
-
-displayForcast();

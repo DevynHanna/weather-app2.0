@@ -43,6 +43,7 @@ button.selected {
 
 .daily-description {
   font-weight: bold;
+  text-transform: capitalize;
 }
 
 p {
